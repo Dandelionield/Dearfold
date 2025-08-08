@@ -20,6 +20,10 @@ const routes: Routes = [
 		loadChildren: () => import('./pages/auth/login/login.module').then( m => m.LoginPageModule)
 
 	},
+  {
+    path: 'logup',
+    loadChildren: () => import('./pages/auth/logup/logup.module').then( m => m.LogupPageModule)
+  },
 
 ];
 

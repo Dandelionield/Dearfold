@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@auth/auth.service';
+import { TokenService } from '@token/token.service';
+import { User } from '@user/entity/user.entity';
+import { Issued } from '@models/issued.model';
 
 @Component({
 
@@ -10,11 +13,15 @@ import { AuthService } from '@auth/auth.service';
 
 }) export class HomePage implements OnInit {
 
-	public constructor(private authService: AuthService) {}
+	public user: User & Issued | undefined;
+
+	public constructor(private authService: AuthService, private tokenService: TokenService) {}
 
 	public async ngOnInit(): Promise<void> {
 
-		try {
+		//console.log('Token: '+this.tokenService.getRefresh());
+
+		/*try {
 
 			console.log(await this.authService.status());
 
@@ -22,7 +29,7 @@ import { AuthService } from '@auth/auth.service';
 
 			console.log(e, e?.error?.message);
 
-		}
+		}/**/
 
 	}
 

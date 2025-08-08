@@ -100,9 +100,9 @@ import { environment } from '@environment/environment';
 
 	}
 
-	public getUser(): User & Issued {
+	public getUser(): User & Issued | undefined {
 
-		return this._loggedUser.value as User & Issued;
+		return this._loggedUser.value;
 
 	}
 

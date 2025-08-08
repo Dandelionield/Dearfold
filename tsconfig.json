@@ -14,7 +14,9 @@
 			"@repo-types/*": ["src/domain/types/*"],
 			"@interfaces/*": ["src/domain/interfaces/*"],
 			"@user/*": ["src/app/core/services/dearfold/user/*"],
-			"@auth/*": ["src/app/core/services/dearfold/auth/*"]
+			"@auth/*": ["src/app/core/services/dearfold/auth/*"],
+			"@token/*": ["src/app/core/services/storage/token/*"],
+			"@cookie/*": ["src/app/core/services/storage/cookie/*"]
 
 		}, "outDir": "./dist/out-tsc",
 		"forceConsistentCasingInFileNames": true,
