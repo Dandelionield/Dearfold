@@ -9,13 +9,14 @@ import { environment } from '@environment/environment';
 
 	public constructor() {}
 
-	public setCookie(name: string, value: string, days: number): void {
+	public setCookie(name: string, value: string, days: number = 7, isHttpOnly: boolean = false): void {
 
 		const date = new Date();
 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 		const expires = `expires=${date.toUTCString()}`;
 		const secureFlag = environment.production ? '; Secure' : '';
-		document.cookie = `${name}=${value}; ${expires}; Path=/; SameSite=Strict${secureFlag}; HttpOnly`;
+		const HttpOnly = isHttpOnly ? '; HttpOnly' : '';
+		document.cookie = `${name}=${value}; ${expires}; Path=/; SameSite=Strict${secureFlag}${HttpOnly}`;
 
 	}
 

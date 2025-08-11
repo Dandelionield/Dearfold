@@ -9,6 +9,7 @@
 
 			"@shared/*": ["src/app/shared/*"],
 			"@core/*": ["src/app/core/*"],
+			"@guards/*": ["src/app/core/guards/*"],
 			"@environment/*": ["src/environments/*"],
 			"@models/*": ["src/domain/models/*"],
 			"@repo-types/*": ["src/domain/types/*"],
@@ -16,6 +17,7 @@
 			"@user/*": ["src/app/core/services/dearfold/user/*"],
 			"@auth/*": ["src/app/core/services/dearfold/auth/*"],
 			"@token/*": ["src/app/core/services/storage/token/*"],
+			"@session/*": ["src/app/core/services/storage/session/*"],
 			"@cookie/*": ["src/app/core/services/storage/cookie/*"]
 
 		}, "outDir": "./dist/out-tsc",

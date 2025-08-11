@@ -57,6 +57,24 @@ import { environment } from '@environment/environment';
 
 	}
 
+	public async refresh(refresh_token: string): Promise<HttpResponse<Token>> {
+
+		try{
+
+			return await lastValueFrom(this.http.post(`${this.collectionName}/refresh`, { refresh_token }, {
+
+				observe: 'response'
+
+			})) as HttpResponse<Token>;
+
+		}catch(e: any){
+
+			throw e as HttpErrorResponse;
+
+		}
+
+	}
+
 	public async logout(refresh_token: string): Promise<HttpResponse<void>> {
 
 		try{

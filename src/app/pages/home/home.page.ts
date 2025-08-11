@@ -19,8 +19,6 @@ import { Issued } from '@models/issued.model';
 
 	public async ngOnInit(): Promise<void> {
 
-		//console.log('Token: '+this.tokenService.getRefresh());
-
 		/*try {
 
 			console.log(await this.authService.status());

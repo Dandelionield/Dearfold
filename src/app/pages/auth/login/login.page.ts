@@ -4,6 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/auth.service';
 import { TokenService } from '@token/token.service';
+import { SessionService } from '@session/session.service';
 import { User } from '@user/entity/user.entity';
 import { Issued } from '@models/issued.model';
 import { SwalService, ErrorMessage } from '@shared/services/swal/swal.service';
@@ -32,6 +33,7 @@ import { Token } from '@models/token.model';
 		private fb: FormBuilder,
 		private authService: AuthService,
 		private tokenService: TokenService,
+		private sessionService: SessionService,
 		private swalService: SwalService,
 		private loadingService: LoadingService,
 		private router: Router
@@ -69,14 +71,15 @@ import { Token } from '@models/token.model';
 
 			};
 
+			this.sessionService.init();
+
 			const tokenResponse: HttpResponse<Token> = await this.authService.login(cred);
 
 			const token: Token | null = tokenResponse.body;
 
 			if (!token) throw new Error('Unable to access due to token');
 
-			this.tokenService.setAccess(token.access_token);
-			this.tokenService.setRefresh(token.refresh_token);
+			this.tokenService.setToken(token);
 
 			const userResponse: HttpResponse<User & Issued> = await this.authService.status();
 
@@ -89,6 +92,8 @@ import { Token } from '@models/token.model';
 			this.router.navigate(['/home']);
 
 		}catch (e: any){
+
+			console.log(e);
 
 			this.swalService.showException(`Error ${e.status}`, ErrorMessage(e));
 

@@ -4,10 +4,13 @@ import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@a
 
 import { AuthInterceptor } from './interceptors/auth/auth.interceptor';
 
+import { AuthGuard } from './guards/auth/auth.guard';
+
 import { UserService } from './services/dearfold/user/user.service';
 import { AuthService } from './services/dearfold/auth/auth.service';
 
 import { TokenService } from './services/storage/token/token.service';
+import { SessionService } from './services/storage/session/session.service';
 import { CookieService } from './services/storage/cookie/cookie.service';
 
 @NgModule({
@@ -26,7 +29,8 @@ import { CookieService } from './services/storage/cookie/cookie.service';
 
 	], providers: [
 
-		provideHttpClient(withInterceptorsFromDi()), AuthService, UserService, TokenService, CookieService, {
+		provideHttpClient(withInterceptorsFromDi()), AuthService, UserService, TokenService,
+		SessionService, CookieService, AuthGuard, {
 
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,

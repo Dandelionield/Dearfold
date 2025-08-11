@@ -6,6 +6,7 @@ import { environment } from '@environment/environment';
 import * as CryptoJS from 'crypto-js';
 import { User } from '@user/entity/user.entity';
 import { Issued } from '@models/issued.model';
+import { Token } from '@models/token.model';
 
 @Injectable({
 
@@ -15,13 +16,13 @@ import { Issued } from '@models/issued.model';
 
 	public constructor(private authService: AuthService, private cookieService: CookieService) {}
 
-	public async init(): Promise<void> {
+	public async init(): Promise<boolean> {
 
 		try{
 
-			const token: string | null = localStorage.getItem('access_token');
+			const access: string | null = this.getAccess();
 
-			if (token && !this.authService.getUser()) {
+			if (access && !this.authService.getUser()) {
 
 				const userResponse: HttpResponse<User & Issued> = await this.authService.status();
 
@@ -29,15 +30,52 @@ import { Issued } from '@models/issued.model';
 
 				if (user) this.authService.setUser(user);
 
+				return true;
+
 			}
 
-		}catch(e){console.log(e);}
+			return false;
+
+		}catch(e){
+
+			//this.removeAccess();
+
+			return false;
+
+		}
 
 	}
 
-	public getAccess(): string | null {
+	public async renew(): Promise<boolean> {
 
-		return localStorage.getItem('access_token');
+		const refresh: string | null = this.getRefresh();
+
+		if (refresh){
+
+			const tokenResponse: HttpResponse<Token> = await this.authService.refresh(refresh);
+
+			const token: Token | null = tokenResponse.body;
+
+			if (token){
+
+				this.setToken(token);
+
+				return await this.init();
+
+			}
+
+			return false;
+
+		}
+
+		return false;
+
+	}
+
+	public setToken(token: Token): void {
+
+		this.setAccess(token.access_token);
+		this.setRefresh(token.refresh_token);
 
 	}
 
@@ -56,7 +94,13 @@ import { Issued } from '@models/issued.model';
 
 		).toString();
 
-		this.cookieService.setCookie('refresh_token', refresh_token, 60);
+		this.cookieService.setCookie('refresh_token', encryptedToken, 60);
+
+	}
+
+	public getAccess(): string | null {
+
+		return localStorage.getItem('access_token');
 
 	}
 
