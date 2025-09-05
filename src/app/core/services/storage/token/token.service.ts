@@ -124,6 +124,7 @@ import { Token } from '@models/token.model';
 	public removeAccess(): void {
 
 		localStorage.removeItem('access_token');
+		this.cookieService.deleteCookie('refresh_token');
 
 	}
 

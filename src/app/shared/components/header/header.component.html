@@ -14,6 +14,12 @@
 
 		<ion-toolbar>
 
+			<ion-buttons slot="start">
+				<ion-button (click)="toggleMenu()" fill="clear" class="menu-button">
+					<ion-icon slot="icon-only" name="menu"></ion-icon>
+				</ion-button>
+			</ion-buttons>
+
 			@if (showBackButton){
 
 				<ion-buttons slot="start">
@@ -69,3 +75,9 @@
 	}
 
 </ion-header>
+
+@if (isMenuOpen){
+
+	<app-side-bar-menu (onClose)="closeMenu()"></app-side-bar-menu>
+
+}

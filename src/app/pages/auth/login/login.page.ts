@@ -21,7 +21,7 @@ import { Token } from '@models/token.model';
 
 }) export class LoginPage implements OnInit {
 
-	loginForm = this.fb.group({
+	public loginForm = this.fb.group({
 
 		email: ['', [Validators.required, Validators.email]],
 		password: ['', [Validators.required]]

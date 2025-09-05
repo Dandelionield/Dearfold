@@ -20,8 +20,6 @@ import { AuthService } from '@auth/auth.service';
 		let access: string | null = this.tokenService.getAccess();
 		const uuid: string | null = this.sessionService.getUUID();
 
-		console.log(uuid);
-
 		let buildHeaders = (access_token: string | null, uuid_param: string | null): { [key: string]: string } => {
 
 			const headers: { [key: string]: string } = access_token ? {

@@ -37,7 +37,7 @@ import { environment } from '@environment/environment';
 
 	}
 
-	/*private deleteCookie(name: string): void {
+	public deleteCookie(name: string): void {
 
 		document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`;
 

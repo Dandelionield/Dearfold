@@ -19,6 +19,7 @@ import { Issued } from '@models/issued.model';
 	@Input() public title: string = 'Page';
 	@Input() public showBackButton: boolean = false;
 	public isExpanded: boolean = false;
+	public isMenuOpen: boolean = false;
 
 	public loggedUser$: Observable<User & Issued | undefined> = this.authService.loggedUser$;
 	public user: User & Issued | undefined;
@@ -31,12 +32,6 @@ import { Issued } from '@models/issued.model';
 		private tokenService: TokenService
 
 	) {}
-
-	public toggleHeader(): void {
-
-		this.isExpanded = !this.isExpanded;
-
-	}
 
 	public ngOnInit(): void {
 
@@ -53,6 +48,30 @@ import { Issued } from '@models/issued.model';
 	}
 
 	public ngOnDestroy(): void {}
+
+	public toggleHeader(): void {
+
+		this.isExpanded = !this.isExpanded;
+
+	}
+
+	public toggleMenu(): void {
+
+		this.isMenuOpen = !this.isMenuOpen;
+
+	}
+
+	public async openMenu() {
+
+		this.isMenuOpen = true;
+
+	}
+
+	public async closeMenu() {
+
+		this.isMenuOpen = false;
+
+	}
 
 	public async logout(): Promise<void> {
 

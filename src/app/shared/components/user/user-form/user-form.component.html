@@ -1,0 +1,120 @@
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+	<div class="profile-image-section ion-text-center ion-margin-bottom">
+
+		<div class="image-container" (click)="takePicture()">
+
+			@if (selectedImage){
+
+				<img [src]="selectedImage" alt="Profile" class="profile-image" />
+
+			}@else{
+
+				<div class="profile-placeholder">
+
+					<ion-icon name="person" class="placeholder-icon"></ion-icon>
+
+				</div>
+
+			}
+			
+			<div class="image-overlay">
+
+				<ion-spinner *ngIf="isTakingPicture" name="crescent"></ion-spinner>
+				<ion-icon *ngIf="!isTakingPicture" name="camera" class="camera-icon"></ion-icon>
+
+			</div>
+
+		</div>
+		
+		@if (selectedImage){
+
+			<ion-button fill="clear" size="small" color="danger" (click)="removePicture()">
+
+				<ion-icon name="trash" slot="start"></ion-icon>
+				Remove Photo
+
+			</ion-button>
+
+		}@else{
+
+			<p class="image-hint">Tap to add a profile photo</p>
+
+		}
+
+	</div>
+
+	<ion-list lines="none">
+
+		<ion-item>
+
+			<ion-input label="Name" formControlName="name" placeholder="Jhon Doe"required></ion-input>
+
+		</ion-item>
+		
+		@if (userForm.controls.name.touched && userForm.controls.name.errors) {
+
+			<ion-note color="danger" class="ion-padding-start">
+
+				Required field
+
+			</ion-note>
+
+		}
+
+		<ion-item>
+
+			<ion-input label="Email" type="email" formControlName="email"	placeholder="jhondoe@email.com" required></ion-input>
+
+		</ion-item>
+
+		@if (userForm.controls.email.touched && userForm.controls.email.errors) {
+
+			<ion-note color="danger" class="ion-padding-start">
+
+				@if (userForm.controls.email.errors['required']) {
+
+					<div>Required Field</div>
+
+				}
+
+				@if (userForm.controls.email.errors['email']) {
+
+					<div>Please enter a valid email</div>
+
+				}
+
+			</ion-note>
+
+		}
+
+		<ion-item>
+
+			<ion-input label="Password" type="password" formControlName="password" [placeholder]="user ? 'Leave blank to keep current password' : '•••••••'"></ion-input>
+
+		</ion-item>
+
+		@if (userForm.controls.password.touched && userForm.controls.password.errors) {
+
+			<ion-note color="danger" class="ion-padding-start">
+
+				@if (userForm.controls.password.errors['required']) {
+
+					<div>Required Field</div>
+
+				}
+
+			</ion-note>
+
+		}
+
+	</ion-list>
+
+	<ion-button type="submit" expand="block" [disabled]="userForm.invalid" class="ion-margin-top">
+
+		{{ user ? 'Update' : 'Sign Up' }}
+
+	</ion-button>
+
+</form>

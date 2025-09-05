@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './components/header/header.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { UserFormComponent } from './components/user/user-form/user-form.component';
+import { SideBarMenuComponent } from './components/side-bar/side-bar-menu/side-bar-menu.component';
 
 import { LoadingService } from './services/loading/loading.service';
 import { SwalService } from './services/swal/swal.service';
@@ -17,7 +19,9 @@ import { SwalService } from './services/swal/swal.service';
 	declarations: [
 
 		HeaderComponent,
-		LoadingComponent
+		LoadingComponent,
+		UserFormComponent,
+		SideBarMenuComponent
 
 	], imports: [
 
@@ -35,7 +39,9 @@ import { SwalService } from './services/swal/swal.service';
 		ReactiveFormsModule,
 		RouterModule,
 		HeaderComponent,
-		LoadingComponent
+		LoadingComponent,
+		UserFormComponent,
+		SideBarMenuComponent
 
 	], providers: [
 

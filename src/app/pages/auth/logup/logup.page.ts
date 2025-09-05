@@ -38,22 +38,15 @@ import { Attribute } from '@repo-types/attribute.type';
 
 	public ngOnInit(): void {}
 
-	public async onSubmit(): Promise<void> {
+	public async onSubmit(formData: Partial<{ name: string; email: string; password: string | null }>): Promise<void> {
 
 		this.loadingService.show('Logging');
 
 		try{
 
-			if (this.logupForm.invalid) {
-
-				this.logupForm.markAllAsTouched();
-				throw new Error('Invalid Paramethers');
-
-			}
-
-			const name = this.logupForm.get('name')?.value;
-			const email = this.logupForm.get('email')?.value;
-			const password = this.logupForm.get('password')?.value;
+			const name = formData.name;
+			const email = formData.email;
+			const password = formData.password;
 
 			if (!email || !password || !name) {
 

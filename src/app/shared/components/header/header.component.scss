@@ -91,6 +91,7 @@ ion-toolbar {
 	font-size: 0.95rem;
 	font-weight: 500;
 	margin-right: 8px;
+	color: var(--ion-color-dark);
 }
 
 .user-avatar {
@@ -139,5 +140,30 @@ ion-button {
 	to {
 		transform: translateY(0);
 		opacity: 1;
+	}
+}
+
+// Ajustes para modo oscuro
+@media (prefers-color-scheme: dark) {
+	.toggle-button-container {
+		background: var(--ion-color-dark);
+	}
+	
+	.user-name {
+		color: var(--ion-color-light);
+	}
+	
+	ion-menu {
+		ion-content {
+			--background: var(--ion-color-dark);
+		}
+		
+		ion-item {
+			--color: var(--ion-color-light);
+			
+			ion-icon {
+				color: var(--ion-color-medium);
+			}
+		}
 	}
 }
